@@ -31,7 +31,7 @@ def shelf(dir):
     if presence != True:
         return 'Нет такого номера'
 
-def list(docs):
+def list_(docs):
     for document in docs:
         print(f'{document["type"]} "{document["number"]}" "{document["name"]}"')
 
@@ -101,24 +101,18 @@ def list_folders(dir):
 
 def main(docs,dir):
     while True:
-        command = input('Введите команду: ')
-        if command == 'p':
-            print(people(docs))
-        elif command == 's':
-            print(shelf(dir))
-        elif command == 'l':
-            list(docs)
-        elif command == 'a':
-            add(docs, dir)
-        elif command == 'd':
-            delete(docs, dir)
-        elif command == 'm':
-            move(dir)
-        elif command == 'as':
-            add_shelf(dir)
-        elif command == 'lf':
-            list_folders(dir)
-        elif command == 'q':
-            break
+
+        commands = {'p': people,
+                    's': shelf,
+                    'l': list_,
+                    'a': add,
+                    'd': delete,
+                    'm': move,
+                    'as': add_shelf,
+                    'lf': list_folders,
+                    'q': []}
+        commands[input('Введите команду: ')]()
+        break
+
 main(documents,directories)
 
